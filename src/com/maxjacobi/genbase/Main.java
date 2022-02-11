@@ -216,10 +216,6 @@ public class Main extends Application {
 			viewGedcomHeaderOnDashboard();
 		}
 
-		// Button to edit HEAD Record
-		Button EditHEADRecord = new Button("Edit GEDCOM");
-		EditHEADRecord.setOnAction((event) -> editGedcomHEADRecord());
-
 		// Put everything together
 		MainContent.add(WelcomeMessage,0,2,5,2);
 		MainContent.add(OpenFileDashboard,0,4,1,1);
@@ -229,7 +225,6 @@ public class Main extends Application {
 		MainContent.add(LoadedFilePathView,0,5,1,1);
 		MainContent.add(LoadedFilePathViewLabel,1,5,5,1);
 		MainContent.add(GedcomHeader,0,6,5,5);
-		MainContent.add(EditHEADRecord,0,11,1,1);
 	}
 
 	void viewPersons() {
@@ -727,32 +722,6 @@ public class Main extends Application {
 			firstSpaceAt = GedcomTag.indexOf(" ",3);
 			return GedcomTag.substring(firstSpaceAt + 1,secondSpaceAt);
 		}
-	}
-
-	void editGedcomHEADRecord() {
-		TextField EditGedcomHEADRecordTextField = new TextField();
-		EditGedcomHEADRecordTextField.setText(GedcomHEADRecord);
-		Button EditGedcomHEADRecordCancel = new Button("Cancel");
-		EditGedcomHEADRecordCancel.setOnAction((event) -> primaryStage.setScene(DefaultScene));
-		Button EditGedcomHEADRecordOkay = new Button("Okay");
-		EditGedcomHEADRecordOkay.setOnAction((event) -> saveNewGedcomHEADRecord(EditGedcomHEADRecordTextField.getText()));
-
-		GridPane EditGedcomHEADRecordGridPane = new GridPane();
-		EditGedcomHEADRecordGridPane.add(EditGedcomHEADRecordTextField,0,0,5,5);
-		EditGedcomHEADRecordGridPane.add(EditGedcomHEADRecordCancel,0,6,1,1);
-		EditGedcomHEADRecordGridPane.add(EditGedcomHEADRecordOkay,4,6,1,1);
-
-		Scene EditGedcomHEADRecordScene = new Scene(EditGedcomHEADRecordGridPane,800,600);
-		primaryStage.setScene(EditGedcomHEADRecordScene);
-		primaryStage.show();
-	}
-
-	void saveNewGedcomHEADRecord(String NewRecord) {
-		GedcomData.replace(GedcomHEADRecord,NewRecord);
-		GedcomHEADRecord = NewRecord;
-		primaryStage.setScene(DefaultScene);
-		primaryStage.show();
-		viewContent("Dashboard");
 	}
 
 }
